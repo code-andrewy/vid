@@ -2,34 +2,194 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Video Player</title>
+  <title>Video Resources | Dark Edition</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
+    /* --- 1. Animations --- */
+    @keyframes slideIn {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- 2. Base Styles --- */
     body {
       margin: 0;
+      padding: 60px 20px;
       min-height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      background: #111;
+      background-color: #0a0a0a; /* Deep Black */
+      color: #ffffff; /* Pure White */
+      font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    }
+
+    .wrapper {
+      max-width: 850px;
+      width: 100%;
+      animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .header {
+      border-bottom: 4px solid #ffffff;
+      margin-bottom: 40px;
+      padding-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    h1 { margin: 0; font-size: 2.2rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; }
+    .header p { margin: 0; font-weight: 400; font-size: 0.9rem; color: #888; text-transform: uppercase; }
+
+    /* --- Video Container --- */
+    .video-container {
+      background: #ffffff; /* White border effect */
+      padding: 8px;
+      line-height: 0;
+      box-shadow: 12px 12px 0px #222; /* Dark offset shadow */
+      margin-bottom: 50px;
+      border-radius: 2px;
     }
 
     video {
-      width: 640px;      /* change size here */
-      max-width: 90%;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      width: 100%;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease, transform 0.5s ease;
+    }
+    
+    video:hover {
+      filter: grayscale(0%);
+    }
+
+    /* --- Grid & Cards --- */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      border: 2px solid #ffffff;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: #0a0a0a;
+      position: relative;
+    }
+
+    /* Animation staggered entry */
+    .card:nth-child(1) { animation: slideIn 0.6s 0.2s both; }
+    .card:nth-child(2) { animation: slideIn 0.6s 0.3s both; }
+    .card:nth-child(3) { animation: slideIn 0.6s 0.4s both; }
+
+    .card:hover {
+      transform: translate(-8px, -8px);
+      box-shadow: 10px 10px 0px #ffffff; /* White shadow on dark bg */
+      background-color: #111;
+    }
+
+    .card i {
+      font-size: 1.8rem;
+      margin-bottom: 5px;
+      color: #ffffff;
+    }
+
+    .card-title {
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: #888;
+    }
+
+    .card-content {
+      font-size: 1rem;
+      word-break: break-all;
+      font-weight: 600;
+    }
+
+    /* --- Links --- */
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      border-bottom: 2px solid #ffffff;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      background: #ffffff;
+      color: #000000;
+      padding: 0 4px;
+    }
+
+    .copy-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      color: #555;
+      margin-top: auto;
+      font-weight: bold;
+    }
+
+    code {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 6px 10px;
+      display: inline-block;
+      margin-top: 5px;
+      border: 1px solid #333;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
 
-  <video
-    src="https://ia600306.us.archive.org/26/items/screen-recording-2026-01-21-5.18.53-pm/Screen%20recording%202026-01-21%205.18.53%20PM.webm"
-    autoplay
-    muted
-    loop
-    controls>
-  </video>
+  <div class="wrapper">
+    <div class="header">
+      <h1>Resources</h1>
+      <p>Reference Data</p>
+    </div>
+
+    <div class="video-container">
+      <video
+        src="https://ia600306.us.archive.org/26/items/screen-recording-2026-01-21-5.18.53-pm/Screen%20recording%202026-01-21%205.18.53%20PM.webm"
+        controls>
+      </video>
+    </div>
+
+    <div class="resources-grid">
+      <div class="card">
+        <i class="fa-brands fa-chrome"></i>
+        <span class="card-title">Browser Link</span>
+        <div class="card-content">
+          <code>chrome://chrome-signin/</code>
+        </div>
+        <span class="copy-label">Copy to address bar</span>
+      </div>
+
+      <div class="card">
+        <i class="fa-brands fa-github"></i>
+        <span class="card-title">GitHub Search</span>
+        <div class="card-content">
+          <a href="https://github.com/search?q=repo%3Acode-andrewy%2Fchicken123" target="_blank">
+            repo:code-andrewy/chicken123
+          </a>
+        </div>
+        <span class="copy-label">View Repository</span>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span class="card-title">Email used</span>
+        <div class="card-content">
+          <a href="mailto:james.poole@d11.org">james.poole@d11.org</a>
+        </div>
+        <span class="copy-label">Won't work with a different one</span>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
